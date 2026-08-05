@@ -633,6 +633,6 @@ Your contributions continue to advance the cybersecurity community.
 
 ### ⭐ If you found VIGIL useful, consider giving the repository a star!
 
-Made with ❤️ for the Cybersecurity Community.
+Built to simplify and automate vulnerability assessments using open-source security tools.
 
 </div>
