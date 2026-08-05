@@ -54,6 +54,8 @@ The framework follows a structured assessment pipeline that reduces manual effor
 - [License](#-license)
 ---
 
+---
+
 # 🏗️ Architecture
 
 VIGIL follows a modular vulnerability assessment pipeline, where each stage performs a specific task before passing the results to the next module.
@@ -162,6 +164,7 @@ After the assessment completes, VIGIL generates:
 - Enumeration summary
 - Technology fingerprinting results
 - Complete scan logs
+
 ---
 
 # 📸 Screenshots
@@ -264,7 +267,7 @@ Severity Levels:
 <p align="center">
 <img src="screenshots/risk-overview.png" width="95%">
 </p>
----
+
 
 
 # 🚀 Installation
