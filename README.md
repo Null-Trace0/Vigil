@@ -67,17 +67,17 @@ VIGIL follows a modular vulnerability assessment pipeline, where each stage perf
                         │
                         ▼
              ┌────────────────────┐
-             │ Reconnaissance     │
+             │   Reconnaissance   │
              └─────────┬──────────┘
                        │
                        ▼
              ┌────────────────────┐
-             │ Enumeration        │
+             │    Enumeration     │
              └─────────┬──────────┘
                        │
                        ▼
              ┌────────────────────┐
-             │ Fingerprinting     │
+             │   Fingerprinting   │
              └─────────┬──────────┘
                        │
                        ▼
@@ -87,17 +87,17 @@ VIGIL follows a modular vulnerability assessment pipeline, where each stage perf
                        │
                        ▼
              ┌────────────────────┐
-             │ CVE Enrichment      │
+             │   CVE Enrichment   │
              └─────────┬──────────┘
                        │
                        ▼
              ┌────────────────────┐
-             │ Risk Analysis      │
+             │    Risk Analysis   │
              └─────────┬──────────┘
                        │
                        ▼
              ┌────────────────────┐
-             │ HTML Report        │
+             │     HTML Report    │
              └────────────────────┘
 ```
 
@@ -304,8 +304,8 @@ Before using VIGIL, ensure the following requirements are installed on your syst
 ## Clone the Repository
 
 ```bash
-git clone https://github.com/Null-Trace0/VIGIL.git
-cd VIGIL
+git clone https://github.com/Null-Trace0/Vigil.git
+cd Vigil
 ```
 
 ---
