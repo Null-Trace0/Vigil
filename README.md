@@ -303,8 +303,14 @@ Before using VIGIL, ensure the following requirements are installed on your syst
 git clone https://github.com/Null-Trace0/VIGIL.git
 cd VIGIL
 ```
-
 ---
+
+## Create a Virtual Environment
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
 
 ## Install Python Dependencies
 
