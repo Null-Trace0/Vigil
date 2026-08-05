@@ -85,7 +85,7 @@ VIGIL follows a modular vulnerability assessment pipeline, where each stage perf
                        │
                        ▼
              ┌────────────────────┐
-             │ CVE Enrichment      │
+             │ CVE Enrichment     │
              └─────────┬──────────┘
                        │
                        ▼
