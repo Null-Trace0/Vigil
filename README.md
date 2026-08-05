@@ -408,23 +408,47 @@ cd VIGIL
 
 ---
 
-## Install Python Dependencies
+## Automated Installation (Recommended)
+
+VIGIL provides an automated installer that creates a Python virtual environment, installs the required Python packages, installs supported security tools, and verifies the installation.
 
 ```bash
-pip install -r requirements.txt
+chmod +x tools/install.sh
+./tools/install.sh
+```
+
+The installer will:
+
+- Create a Python virtual environment (`.venv`)
+- Install all Python dependencies
+- Install ProjectDiscovery tools (Nuclei, Subfinder, HTTPX, DNSX, Katana)
+- Install required system packages
+- Verify that all dependencies are correctly installed
+
+> **Supported Operating Systems**
+>
+> - Arch Linux (including CachyOS)
+> - Ubuntu
+> - Debian
+> - Fedora
+
+---
+
+## Activate the Virtual Environment
+
+```bash
+source .venv/bin/activate
 ```
 
 ---
 
 ## Verify Installation
 
-Ensure all required tools are available.
-
 ```bash
 python main.py --help
 ```
 
-If the help menu appears successfully, VIGIL is ready to use.
+If the help menu appears without any errors, VIGIL has been installed successfully.
 
 ---
 
