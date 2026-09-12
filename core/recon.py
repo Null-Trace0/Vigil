@@ -30,32 +30,39 @@ def run(scan, state):
     state.set_stage_running("Recon")
 
     # ------------------------------------------------------
+    # SUBFINDER
+    # ------------------------------------------------------
 
     subdomains = subfinder(target, state)
-    state.add_event(
-        f"[+] {len(subdomains)} Subdomains Found"
-    )
 
     state.set_progress(5)
 
+    # ------------------------------------------------------
+    # HTTPX
     # ------------------------------------------------------
 
     alive = httpx(state)
 
     state.set_progress(10)
 
-    state.add_event(
-        f"[+] {len(alive)} Alive Hosts"
-    )
+    # ------------------------------------------------------
+    # KATANA
+    # ------------------------------------------------------
 
+    katana_urls = katana(state)
+
+    state.set_progress(13)
+
+    # ------------------------------------------------------
+    # DNSX
     # ------------------------------------------------------
 
     dns = dnsx(state)
 
     state.set_progress(15)
 
-    state.add_event("[+] DNS Enumeration Finished")
-
+    # ------------------------------------------------------
+    # WHOIS
     # ------------------------------------------------------
 
     whois_data = whois(target, state)
@@ -63,28 +70,21 @@ def run(scan, state):
     state.set_progress(20)
 
     # ------------------------------------------------------
+    # SAVE RESULTS
+    # ------------------------------------------------------
 
     scan["recon"] = {
-
         "subdomains": subdomains,
-
         "alive_hosts": alive,
-
+        "katana_urls": katana_urls,
         "dns": dns,
-
         "whois": whois_data,
-
     }
 
     utils.save_json(
-
         OUTPUT / "recon.json",
-
-        scan["recon"]
-
+        scan["recon"],
     )
-
-    # ------------------------------------------------------
 
     state.complete_stage("Recon")
 
@@ -101,26 +101,21 @@ def subfinder(target, state):
 
     output = OUTPUT / "subdomains.txt"
 
-    command = (
-
-        f"subfinder "
-
-        f"-d {target} "
-
-        f"-silent "
-
-        f"-o {output}"
-
-    )
+    command = [
+        "subfinder",
+        "-d",
+        target,
+        "-silent",
+        "-o",
+        str(output),
+    ]
 
     utils.run_command(command)
 
     subdomains = utils.read_lines(output)
 
     state.add_event(
-
         f"[+] {len(subdomains)} Subdomains Found"
-
     )
 
     return subdomains
@@ -133,32 +128,64 @@ def subfinder(target, state):
 def httpx(state):
 
     input_file = OUTPUT / "subdomains.txt"
-
     output_file = OUTPUT / "alive.txt"
 
-    command = (
-
-        f"httpx "
-
-        f"-silent "
-
-        f"-l {input_file} "
-
-        f"-o {output_file}"
-
-    )
+    command = [
+        "httpx",
+        "-silent",
+        "-l",
+        str(input_file),
+        "-o",
+        str(output_file),
+    ]
 
     utils.run_command(command)
 
     alive = utils.read_lines(output_file)
 
     state.add_event(
-
         f"[+] {len(alive)} Alive Hosts"
-
     )
 
     return alive
+
+
+# ==========================================================
+# KATANA
+# ==========================================================
+
+def katana(state):
+
+    input_file = OUTPUT / "alive.txt"
+    output_file = OUTPUT / "katana.txt"
+
+    if not input_file.exists():
+
+        state.add_event("[!] Katana Input Missing")
+
+        return []
+
+    command = [
+        "katana",
+        "-list",
+        str(input_file),
+        "-silent",
+        "-o",
+        str(output_file),
+    ]
+
+    utils.run_command(
+        command,
+        timeout=300,
+    )
+
+    urls = utils.read_lines(output_file)
+
+    state.add_event(
+        f"[+] {len(urls)} URLs Discovered"
+    )
+
+    return urls
 
 
 # ==========================================================
@@ -168,41 +195,29 @@ def httpx(state):
 def dnsx(state):
 
     input_file = OUTPUT / "subdomains.txt"
-
     output_file = OUTPUT / "dns.txt"
 
-    command = (
-
-        f"dnsx "
-
-        f"-silent "
-
-        f"-resp "
-
-        f"-a "
-
-        f"-aaaa "
-
-        f"-cname "
-
-        f"-mx "
-
-        f"-ns "
-
-        f"-l {input_file} "
-
-        f"-o {output_file}"
-
-    )
+    command = [
+        "dnsx",
+        "-silent",
+        "-resp",
+        "-a",
+        "-aaaa",
+        "-cname",
+        "-mx",
+        "-ns",
+        "-l",
+        str(input_file),
+        "-o",
+        str(output_file),
+    ]
 
     utils.run_command(command)
 
     dns = utils.read_lines(output_file)
 
     state.add_event(
-
         f"[+] {len(dns)} DNS Records"
-
     )
 
     return dns
@@ -214,27 +229,23 @@ def dnsx(state):
 
 def whois(target, state):
 
-    output = utils.run_command(
+    command = [
+        "whois",
+        target,
+    ]
 
-        f"whois {target}"
-
-    )
+    output = utils.run_command(command)
 
     if output is None:
-
         output = ""
 
     utils.save_text(
-
         OUTPUT / "whois.txt",
-
         output,
     )
 
     state.add_event(
-
         "[+] WHOIS Collected"
-
     )
 
     return output

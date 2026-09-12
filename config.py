@@ -32,7 +32,8 @@ REQUIRED_TOOLS = [
     "katana",
     "nmap",
     "whatweb",
-    "ffuf",
     "nikto",
-    "nuclei"
+    "nuclei",
+    "curl",
+    "whois",
 ]

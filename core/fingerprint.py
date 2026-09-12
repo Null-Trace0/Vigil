@@ -83,12 +83,12 @@ def run_whatweb(target, state):
 
     output_file = OUTPUT / "whatweb.txt"
 
-    command = (
-        f"whatweb "
-        f"--no-errors "
-        f"--log-brief={output_file} "
-        f"http://{target}"
-    )
+    command = [
+        "whatweb",
+        "--no-errors",
+        f"--log-brief={output_file}",
+        f"http://{target}",
+    ]
 
     output = utils.run_command(
         command,
@@ -109,7 +109,6 @@ def run_whatweb(target, state):
 
     return utils.read_text(output_file)
 
-
 # ==========================================================
 # HTTP HEADERS
 # ==========================================================
@@ -118,14 +117,15 @@ def get_headers(target, state):
 
     state.add_event("[*] Collecting HTTP Headers")
 
-    command = (
-        f"curl "
-        f"-I "
-        f"-L "
-        f"-s "
-        f"--max-time 20 "
-        f"http://{target}"
-    )
+    command = [
+        "curl",
+        "-I",
+        "-L",
+        "-s",
+        "--max-time",
+        "20",
+        f"http://{target}",
+    ]
 
     output = utils.run_command(
         command,
@@ -160,7 +160,6 @@ def get_headers(target, state):
     )
 
     return headers
-
 
 # ==========================================================
 # TECHNOLOGY EXTRACTION

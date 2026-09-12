@@ -27,6 +27,7 @@ echo -e "${NC}"
 
 pause_step
 
+
 # ==========================================================
 # Detect Linux Distribution
 # ==========================================================
@@ -49,6 +50,7 @@ echo -e "${GREEN}Detected:${NC} $DISTRO"
 
 pause_step
 
+
 # ==========================================================
 # Install Base Dependencies
 # ==========================================================
@@ -60,48 +62,53 @@ pause_step
 
 case "$DISTRO" in
 
-arch)
+    arch)
 
-    sudo pacman -S --needed --noconfirm \
-        python \
-        python-pip \
-        python-pipx \
-        git \
-        go \
-        nmap \
-        base-devel
-    ;;
+        sudo pacman -S --needed --noconfirm \
+            python \
+            python-pip \
+            python-pipx \
+            git \
+            go \
+            nmap \
+            curl \
+            whois \
+            base-devel
+        ;;
 
-debian)
+    debian)
 
-    sudo apt update
+        sudo apt update
 
-    sudo apt install -y \
-        python3 \
-        python3-pip \
-        python3-venv \
-        pipx \
-        git \
-        golang \
-        nmap \
-        ffuf
-    ;;
+        sudo apt install -y \
+            python3 \
+            python3-pip \
+            python3-venv \
+            pipx \
+            git \
+            golang \
+            nmap \
+            curl \
+            whois
+        ;;
 
-fedora)
+    fedora)
 
-    sudo dnf install -y \
-        python3 \
-        python3-pip \
-        pipx \
-        git \
-        golang \
-        nmap \
-        ffuf
-    ;;
+        sudo dnf install -y \
+            python3 \
+            python3-pip \
+            pipx \
+            git \
+            golang \
+            nmap \
+            curl \
+            whois
+        ;;
 
 esac
 
 pause_step
+
 
 # ==========================================================
 # Local Binary Directory
@@ -111,6 +118,7 @@ mkdir -p "$HOME/.local/bin"
 
 export PATH="$HOME/.local/bin:$PATH"
 export GOBIN="$HOME/.local/bin"
+
 
 # ==========================================================
 # Install Vigil
@@ -123,19 +131,18 @@ pause_step
 
 if pipx list 2>/dev/null | grep -q "package vigil"; then
 
-    echo -e "${YELLOW}Vigil is already installed. Updating...${NC}"
+    echo -e "${YELLOW}Vigil is already installed. Reinstalling...${NC}"
 
-    pipx install . --force
-
-else
-
-    pipx install .
+    pipx uninstall vigil
 
 fi
+
+pipx install .
 
 echo -e "${GREEN}[✔] Vigil installed${NC}"
 
 pause_step
+
 
 # ==========================================================
 # ProjectDiscovery Tools
@@ -185,37 +192,6 @@ install_go_tool \
 
 pause_step
 
-# ==========================================================
-# FFUF
-# ==========================================================
-
-if ! command -v ffuf >/dev/null 2>&1; then
-
-    echo
-    echo -e "${BLUE}[→]${NC} Installing FFUF..."
-
-    pause_step
-
-    if command -v yay >/dev/null 2>&1; then
-
-        yay -S --noconfirm ffuf
-
-    elif command -v paru >/dev/null 2>&1; then
-
-        paru -S --noconfirm ffuf
-
-    else
-
-        GOBIN="$HOME/.local/bin" \
-            go install github.com/ffuf/ffuf/v2@latest
-
-    fi
-
-    echo -e "${GREEN}[✔] FFUF installed${NC}"
-
-    pause_step
-
-fi
 
 # ==========================================================
 # WhatWeb
@@ -264,6 +240,7 @@ if ! command -v whatweb >/dev/null 2>&1; then
 
 fi
 
+
 # ==========================================================
 # Nikto
 # ==========================================================
@@ -311,6 +288,7 @@ if ! command -v nikto >/dev/null 2>&1; then
 
 fi
 
+
 # ==========================================================
 # Verify Installation
 # ==========================================================
@@ -337,21 +315,44 @@ verify() {
     sleep 0.15
 }
 
+
+verify_python() {
+
+    if command -v python >/dev/null 2>&1; then
+
+        echo -e "[${GREEN}✔${NC}] python"
+
+    elif command -v python3 >/dev/null 2>&1; then
+
+        echo -e "[${GREEN}✔${NC}] python3"
+
+    else
+
+        echo -e "[${RED}✘${NC}] python"
+
+    fi
+
+    sleep 0.15
+}
+
+
 verify vigil
-verify python
+verify_python
 verify git
 verify go
 verify nmap
-verify nuclei
 verify subfinder
 verify httpx
 verify dnsx
 verify katana
-verify ffuf
+verify nuclei
 verify whatweb
 verify nikto
+verify curl
+verify whois
 
 sleep 1
+
 
 # ==========================================================
 # Finish
@@ -366,7 +367,7 @@ if command -v vigil >/dev/null 2>&1; then
     echo "Run:"
     echo
     echo "  vigil --help"
-    echo "  vigil <target>"
+    echo "  vigil -d <target>"
 
 else
 

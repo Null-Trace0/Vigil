@@ -78,14 +78,15 @@ def run_nmap(
         "[*] Running Nmap Service Discovery"
     )
 
-    command = (
-        "nmap "
-        "-Pn "
-        "-sV "
-        "--version-light "
-        f"-oX {xml_file} "
-        f"{target}"
-    )
+    command = [
+        "nmap",
+        "-Pn",
+        "-sV",
+        "--version-light",
+        "-oX",
+        str(xml_file),
+        target,
+    ]
 
     output = utils.run_command(
         command,
@@ -105,7 +106,6 @@ def run_nmap(
     )
 
     return True
-
 
 # ==========================================================
 # XML PARSER

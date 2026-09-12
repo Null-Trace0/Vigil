@@ -167,17 +167,10 @@ def run_command(command, timeout=120):
     try:
 
         process = subprocess.run(
-
             command,
-
-            shell=True,
-
             capture_output=True,
-
             text=True,
-
             timeout=timeout,
-
         )
 
     except subprocess.TimeoutExpired:
