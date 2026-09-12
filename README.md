@@ -1,4 +1,4 @@
-# Vigil
+<h1 align="center">Vigil</h1>
 
 <p align="center">
   <strong>Automated Vulnerability Assessment Framework</strong>
