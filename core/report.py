@@ -365,8 +365,7 @@ def build_recommendations(scan):
 
 
 def build_footer(generated_at):
-    return f'''<footer class="footer"><div class="footer-inner"><div><span class="footer-brand">VIGIL</span> &nbsp; Open Source Vulnerability Assessment Framework</div><div>Generated {generated_at.strftime("%d %b %Y, %H:%M:%S")} · Version {text(getattr(config, "VERSION", "Unknown"))} · Author: Nulltrace</div></div></footer>'''
-
+    return f'''<footer class="footer"><div class="footer-inner"><div><span class="footer-brand">VIGIL</span> &nbsp; Open Source Vulnerability Assessment Framework</div><div>Generated {generated_at.strftime("%d %b %Y, %H:%M:%S")} · Version {text(getattr(config, "VERSION", "Unknown"))} · Vigil by NullTrace</div></div></footer>'''
 
 def section(title, intro, content):
     return f'<section class="section"><div class="section-head"><div><p class="section-kicker">VIGIL Assessment</p><h2>{text(title)}</h2></div><p class="section-intro">{text(intro)}</p></div>{content}</section>'
