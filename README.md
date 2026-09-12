@@ -1,540 +1,306 @@
-<div align="center">
+# Vigil
 
-# 🛡️ VIGIL
+Vigil is a CLI-based vulnerability assessment framework built to automate the early stages of a security assessment.
 
-### Open Source Vulnerability Assessment Framework
-
-An automated security assessment framework that performs **Reconnaissance, Enumeration, Fingerprinting, Vulnerability Detection, CVE Mapping, Risk Analysis, and Professional HTML Reporting** using industry-standard open-source security tools.
-
-![Python](https://img.shields.io/badge/Python-3.14+-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Platform](https://img.shields.io/badge/Platform-Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
-![Status](https://img.shields.io/badge/Status-Stable-success?style=for-the-badge)
-![Security](https://img.shields.io/badge/Focus-Cybersecurity-red?style=for-the-badge)
-
-</div>
+It combines reconnaissance, service enumeration, technology fingerprinting, vulnerability detection, CVE mapping, risk analysis, and HTML reporting into a single workflow while providing a live terminal dashboard throughout the assessment.
 
 ---
 
-## 📖 Overview
+## Features
 
-VIGIL is an **Open Source Vulnerability Assessment Framework** designed to automate the early phases of security assessments. It combines multiple industry-standard open-source tools into a single workflow, enabling security professionals and students to efficiently identify exposed services, detect vulnerabilities, enrich findings with CVE information, calculate overall risk, and generate professional HTML reports.
-
-The framework follows a structured assessment pipeline that reduces manual effort while producing organized, actionable results.
-
----
-
-## ✨ Key Features
-
-- 🔍 Automated Reconnaissance
-- 🌐 Service Enumeration
-- 🖥️ Technology Fingerprinting
-- 🚨 Vulnerability Detection
-- 🛡️ CVE Enrichment
-- 📊 Risk Analysis
-- 📄 Professional HTML Report Generation
-- 📈 Interactive Terminal Dashboard
-- ⚡ Modular Architecture
-- 🔧 Easy Tool Integration
+* Automated reconnaissance and target discovery
+* Port and service detection and enumeration
+* Technology and web stack fingerprinting
+* Automated vulnerability detection
+* CVE mapping and enrichment
+* CVSS-based severity information
+* Risk scoring and severity classification
+* Remediation recommendations
+* Interactive terminal dashboard
+* Structured scan output
+* HTML vulnerability assessment reports
+* Modular assessment pipeline
 
 ---
 
-## 📑 Table of Contents
+## Installation
 
-- [Overview](#-overview)
-- [Key Features](#-key-features)
-- [Architecture](#-architecture)
-- [Screenshots](#-screenshots)
-- [Installation](#-installation)
-- [Usage](#-usage)
-- [Project Structure](#-project-structure)
-- [Tools Used](#-tools-used)
-- [Roadmap](#-roadmap)
-- [Disclaimer](#-disclaimer)
-- [License](#-license)
----
+### Automated Setup
 
----
-
-# 🏗️ Architecture
-
-VIGIL follows a modular vulnerability assessment pipeline, where each stage performs a specific task before passing the results to the next module.
-
-```text
-                 ┌─────────────┐
-                 │   Target    │
-                 └──────┬──────┘
-                        │
-                        ▼
-             ┌────────────────────┐
-             │   Reconnaissance   │
-             └─────────┬──────────┘
-                       │
-                       ▼
-             ┌────────────────────┐
-             │    Enumeration     │
-             └─────────┬──────────┘
-                       │
-                       ▼
-             ┌────────────────────┐
-             │   Fingerprinting   │
-             └─────────┬──────────┘
-                       │
-                       ▼
-             ┌────────────────────┐
-             │ Vulnerability Scan │
-             └─────────┬──────────┘
-                       │
-                       ▼
-             ┌────────────────────┐
-             │   CVE Enrichment   │
-             └─────────┬──────────┘
-                       │
-                       ▼
-             ┌────────────────────┐
-             │    Risk Analysis   │
-             └─────────┬──────────┘
-                       │
-                       ▼
-             ┌────────────────────┐
-             │     HTML Report    │
-             └────────────────────┘
-```
-
----
-
-# ⚙️ Assessment Workflow
-
-The framework executes each stage in sequence, ensuring that information collected in earlier phases is reused throughout the assessment.
-
-| Stage | Description |
-|--------|-------------|
-| 🔍 Reconnaissance | Discovers the target and gathers publicly available information. |
-| 🌐 Enumeration | Identifies live hosts, open ports, running services, and operating system details using Nmap. |
-| 🖥️ Fingerprinting | Detects technologies, web servers, frameworks, and software versions. |
-| 🚨 Vulnerability Detection | Performs automated vulnerability scanning using multiple security tools. |
-| 🛡️ CVE Enrichment | Maps identified vulnerabilities to publicly known CVEs whenever possible. |
-| 📊 Risk Analysis | Calculates the overall security posture based on detected findings and their severity. |
-| 📄 HTML Report | Generates a professional report containing findings, impacts, recommendations, and executive summaries. |
-
----
-
-# 🔄 Assessment Pipeline
-
-VIGIL integrates multiple open-source security tools into a single automated workflow.
-
-```text
-Target
-   │
-   ├── Reconnaissance
-   │      ├── Subfinder
-   │      ├── HTTPX
-   │      ├── DNSX
-   │      └── Katana
-   │
-   ├── Enumeration
-   │      └── Nmap
-   │
-   ├── Fingerprinting
-   │      └── WhatWeb
-   │
-   ├── Vulnerability Detection
-   │      ├── Nuclei
-   │      ├── Nikto
-   │      └── FFUF
-   │
-   ├── CVE Mapping
-   │
-   ├── Risk Analysis
-   │
-   └── HTML Report Generation
-```
-
----
-
-# 📊 Output
-
-After the assessment completes, VIGIL generates:
-
-- Professional HTML security report
-- Executive summary
-- Risk score and severity breakdown
-- CVE-enriched vulnerability findings
-- Remediation recommendations
-- Enumeration summary
-- Technology fingerprinting results
-- Complete scan logs
-
----
-
-# 📸 Screenshots
-
-> **Note:** The screenshots below showcase VIGIL's interactive dashboard and the generated HTML vulnerability assessment report.
-
-## 🖥️ Interactive Dashboard
-
-The live dashboard provides real-time visibility into the assessment process.
-
-It displays:
-
-- Current assessment stage
-- Overall progress
-- Live event logs
-- Running services
-- Discovered vulnerabilities
-- Risk summary
-- Scan statistics
-
-<p align="center">
-<img src="screenshots/dashboard.png" width="95%">
-</p>
-
----
-
-## 📄 Professional HTML Report
-
-After the assessment completes, VIGIL automatically generates a professional HTML report containing all discovered findings.
-
-The report includes:
-
-- Executive Summary
-- Risk Overview
-- Service Enumeration
-- Technology Fingerprinting
-- Vulnerability Details
-- CVE Information
-- Security Recommendations
-- Scan Metadata
-
-<p align="center">
-<img src="screenshots/report-home.png" width="95%">
-</p>
-
----
-
-## 🚨 Vulnerability Analysis
-
-Each finding is enriched with detailed information to help security analysts quickly understand and remediate vulnerabilities.
-
-Every vulnerability card contains:
-
-- Severity
-- CVSS Score
-- Description
-- Business Impact
-- Recommendation
-- References
-- CVE Information (when available)
-
-<p align="center">
-<img src="screenshots/report-findings.png" width="95%">
-</p>
-
----
-
-## 📊 Executive Summary
-
-VIGIL provides a high-level overview of the assessment, making it easy to understand the target's overall security posture.
-
-The executive summary includes:
-
-- Overall Risk Level
-- Total Findings
-- Severity Distribution
-- Open Ports
-- Services Identified
-- Technologies Detected
-- Scan Duration
-
-<p align="center">
-<img src="screenshots/report-summary.png" width="95%">
-</p>
-
----
-
-## 📈 Risk Distribution
-
-The generated report categorizes findings based on severity to help prioritize remediation efforts.
-
-Severity Levels:
-
-- 🔴 Critical
-- 🟠 High
-- 🟡 Medium
-- 🔵 Low
-- ⚪ Informational
-
-<p align="center">
-<img src="screenshots/risk-overview.png" width="95%">
-</p>
-
-
-
-# 🚀 Installation
-
-## Prerequisites
-
-Before using VIGIL, ensure the following requirements are installed on your system.
-
-### Operating System
-
-- Linux (Recommended)
-- Python 3.14+
-- Git
-- Go
-
----
-
-## Required Security Tools
-
-| Tool | Purpose |
-|------|---------|
-| Nmap | Port scanning and service enumeration |
-| Nuclei | Vulnerability detection |
-| Subfinder | Subdomain discovery |
-| HTTPX | HTTP probing |
-| DNSX | DNS enumeration |
-| Katana | Web crawling |
-| WhatWeb | Technology fingerprinting |
-| FFUF | Content discovery |
-| Nikto | Web server vulnerability scanning |
-
----
-
-## Clone the Repository
+Clone the repository:
 
 ```bash
 git clone https://github.com/Null-Trace0/Vigil.git
 cd Vigil
 ```
 
----
-
-## Automated Installation (Recommended)
-
-VIGIL provides an automated installer that creates a Python virtual environment, installs the required Python packages, installs supported security tools, and verifies the installation.
+Give the installer execute permission and run it:
 
 ```bash
-chmod +x tools/install.sh
-./tools/install.sh
+chmod +x install.sh
+./install.sh
 ```
 
-The installer will:
+The installation script requires Bash.
 
-- Create a Python virtual environment (`.venv`)
-- Install all Python dependencies
-- Install ProjectDiscovery tools (Nuclei, Subfinder, HTTPX, DNSX, Katana)
-- Install required system packages
-- Verify that all dependencies are correctly installed
+The installer handles the Vigil Python environment and installs or verifies the external security tools required by the assessment pipeline.
 
-> **Supported Operating Systems**
->
-> - Arch Linux (including CachyOS)
-> - Ubuntu
-> - Debian
-> - Fedora
-
----
-
-## Activate the Virtual Environment
+After installation, verify Vigil:
 
 ```bash
-source .venv/bin/activate
+vigil --help
 ```
 
----
+### Manual Setup
 
-## Verify Installation
+If the automated installer fails or your distribution is not supported, Vigil can be installed manually.
+
+Ensure Python 3.10+, `pipx`, Git, Go, and the required external security tools are installed.
+
+Install Vigil from the repository:
 
 ```bash
-python main.py --help
+pipx install .
 ```
 
-If the help menu appears without any errors, VIGIL has been installed successfully.
+Ensure the following tools are installed and available in your `PATH`:
 
----
-
-# 💻 Usage
-
-Run a complete assessment against a target domain:
-
-```bash
-python main.py -d example.com
+```text
+nmap
+subfinder
+httpx
+dnsx
+katana
+nuclei
+ffuf
+whatweb
+nikto
 ```
 
-Skip Nuclei scanning:
+Verify the installation:
 
 ```bash
-python main.py -d example.com --skip-nuclei
-```
-
-Skip Nikto scanning:
-
-```bash
-python main.py -d example.com --skip-nikto
+vigil --help
 ```
 
 ---
 
-# 📂 Generated Output
+## Usage
 
-After each assessment, VIGIL generates structured output inside the project directory.
+Run an assessment against a target:
+
+```bash
+vigil -d example.com
+```
+
+View all available options:
+
+```bash
+vigil --help
+```
+
+Individual scanners can also be skipped when required.
+
+```bash
+vigil -d example.com --skip-nuclei
+```
+
+```bash
+vigil -d example.com --skip-nikto
+```
+
+Vigil is designed for vulnerability assessment and does not perform automated exploitation.
+
+---
+
+## Workflow
+
+Vigil processes collected information through a sequential assessment pipeline.
+
+```text
+Target
+  │
+  ▼
+Reconnaissance
+  │
+  ├── Subfinder
+  ├── HTTPX
+  ├── DNSX
+  └── Katana
+  │
+  ▼
+Enumeration
+  │
+  └── Nmap
+  │
+  ▼
+Fingerprinting
+  │
+  └── WhatWeb
+  │
+  ▼
+Vulnerability Detection
+  │
+  ├── Nuclei
+  ├── Nikto
+  └── FFUF
+  │
+  ▼
+CVE Mapping
+  │
+  ▼
+Risk Analysis
+  │
+  ▼
+HTML Report
+```
+
+Information collected during one stage is passed to later stages, allowing Vigil to build a more complete assessment instead of running each tool independently.
+
+---
+
+## Interactive Dashboard
+
+Vigil provides a live terminal dashboard while an assessment is running.
+
+The dashboard displays assessment information such as:
+
+* Current pipeline stage
+* Assessment progress
+* Live events
+* Discovered services
+* Vulnerability findings
+* Risk information
+* Scan statistics
+
+This allows the assessment to be monitored without waiting for the final report to be generated.
+
+---
+
+## Requirements
+
+### Platform
+
+Vigil is designed for Linux.
+
+The automated installer includes support for distributions using:
+
+* `pacman` — Arch Linux and derivatives such as CachyOS
+* `apt` — Debian, Ubuntu, Kali, Linux Mint, and derivatives
+* `dnf` — Fedora and derivatives
+
+The installer uses additional installation methods where required.
+
+### Python
+
+Vigil requires:
+
+```text
+Python 3.10+
+```
+
+Python package dependencies are handled automatically during installation.
+
+### External Tools
+
+| Tool      | Purpose                                        |
+| --------- | ---------------------------------------------- |
+| Nmap      | Port scanning, service and version enumeration |
+| Subfinder | Subdomain discovery                            |
+| HTTPX     | HTTP probing                                   |
+| DNSX      | DNS enumeration                                |
+| Katana    | Web crawling and endpoint discovery            |
+| WhatWeb   | Web technology fingerprinting                  |
+| Nuclei    | Template-based vulnerability detection         |
+| Nikto     | Web server security assessment                 |
+| FFUF      | Content and directory discovery                |
+
+All required tools should be available through the user's `PATH`.
+
+---
+
+## Generated Output
+
+Generated data is stored under the appropriate output, report, and log directories.
 
 ```text
 output/
-├── recon/
-├── enumeration/
-├── fingerprint/
-├── scanner/
-├── vulnerability/
-├── reports/
-│   └── report.html
-└── logs/
+reports/
+logs/
 ```
 
-The generated HTML report can be opened in any modern web browser for detailed analysis.
+The `output/` directory contains intermediate and structured assessment data produced by the different modules.
+
+The `reports/` directory contains generated HTML assessment reports.
+
+The `logs/` directory contains runtime and assessment logs.
+
+Generated scan data is excluded from the repository by default.
 
 ---
 
-# ⚡ Features at a Glance
+## Screenshots
 
-✔ Automated Reconnaissance
+### Interactive Dashboard
 
-✔ Service Enumeration
+The terminal dashboard provides live visibility into the assessment while the pipeline is running.
 
-✔ Technology Fingerprinting
+<p align="center">
+  <img src="screenshots/dashboard.png" width="95%" alt="Vigil interactive dashboard">
+</p>
 
-✔ Vulnerability Detection
+### HTML Report
 
-✔ CVE Mapping
+Vigil generates an HTML report after completing the assessment.
 
-✔ Risk Analysis
+<p align="center">
+  <img src="screenshots/report-home.png" width="95%" alt="Vigil HTML vulnerability assessment report">
+</p>
 
-✔ Professional HTML Report
+### Vulnerability Findings
 
-✔ Interactive Terminal Dashboard
+Individual findings contain vulnerability details, severity information, impact, references, and remediation guidance where available.
 
-✔ Modular Architecture
----
+<p align="center">
+  <img src="screenshots/report-findings.png" width="95%" alt="Vigil vulnerability findings">
+</p>
 
-# 📁 Project Structure
+### Risk Overview
 
-The project is organized into modular components, making it easy to maintain, extend, and integrate new features.
+The report provides a summarized view of the identified findings and their severity distribution.
 
-```text
-VIGIL/
-├── core/                  # Core assessment modules
-│   ├── recon.py
-│   ├── enumeration.py
-│   ├── fingerprint.py
-│   ├── scanner.py
-│   ├── vulnerability.py
-│   ├── cve.py
-│   ├── risk.py
-│   ├── report.py
-│   └── knowledgebase.py
-│
-├── ui/                    # Interactive dashboard
-│   ├── dashboard.py
-│   └── state.py
-│
-├── output/                # Scan outputs
-├── reports/               # Generated HTML reports
-├── logs/                  # Scan logs
-├── requirements.txt
-├── config.py
-├── main.py
-├── LICENSE
-└── README.md
-```
+<p align="center">
+  <img src="screenshots/risk-overview.png" width="95%" alt="Vigil risk overview">
+</p>
 
 ---
 
-# 🛠️ Tools Used
+## Limitations
 
-VIGIL integrates several industry-standard open-source security tools to automate different phases of a vulnerability assessment.
+Vigil automates parts of a vulnerability assessment, but automated scanner results should not be treated as a replacement for manual validation.
 
-| Tool | Purpose |
-|------|---------|
-| Nmap | Port scanning and service enumeration |
-| Nuclei | Template-based vulnerability scanning |
-| Subfinder | Subdomain discovery |
-| HTTPX | HTTP probing |
-| DNSX | DNS enumeration |
-| Katana | Web crawling |
-| WhatWeb | Web technology fingerprinting |
-| FFUF | Content and directory discovery |
-| Nikto | Web server vulnerability scanning |
+Results may include false positives, false negatives, incomplete CVE mappings, or findings that require additional investigation.
+
+Assessment coverage also depends on the target, network accessibility, external tool capabilities, and the vulnerability templates available at scan time.
+
+Vigil does not automatically exploit detected vulnerabilities.
 
 ---
 
-# 🗺️ Roadmap
+## Responsible Use
 
-### ✅ Current Features
+Vigil is intended for authorized security testing, security research, lab environments, and educational use.
 
-- Automated Reconnaissance
-- Service Enumeration
-- Technology Fingerprinting
-- Vulnerability Detection
-- CVE Enrichment
-- Risk Analysis
-- Interactive Terminal Dashboard
-- Professional HTML Report Generation
-- Modular Framework Design
+Only scan systems that you own or have explicit permission to assess.
 
-### 🚀 Planned Features
+Users are responsible for ensuring that their use of Vigil complies with applicable laws, regulations, scope restrictions, and authorization requirements.
 
-- PDF Report Export
-- Multi-target Scanning
-- Custom Scan Profiles
-- API-Based Scanning
-- Plugin Support
-- Docker Deployment
-- Configuration Wizard
-- Authentication Testing Modules
+The developers assume no responsibility for unauthorized or unlawful use of this software.
 
 ---
 
-# ⚠️ Disclaimer
+## License
 
-VIGIL is intended **only for educational purposes, security research, and authorized penetration testing**.
+Copyright © 2026 NullTrace.
 
-Users are solely responsible for ensuring they have proper authorization before scanning or testing any system.
-
-The developers of VIGIL are **not responsible for any misuse, unauthorized activities, or damages resulting from the use of this software.**
-
----
-
-# 📄 License
-
-This project is licensed under the **MIT License**.
-
-See the **LICENSE** file for complete licensing information.
-
----
-
-# 🙏 Acknowledgements
-
-VIGIL would not be possible without the incredible open-source security community.
-
-Special thanks to the developers and maintainers of:
-
-- Nmap
-- ProjectDiscovery (Nuclei, Subfinder, HTTPX, DNSX, Katana)
-- WhatWeb
-- FFUF
-- Nikto
-- Python
-- Rich
-
-Your contributions continue to advance the cybersecurity community.
-
----
-
-<div align="center">
-
-### ⭐ If you found VIGIL useful, consider giving the repository a star!
-
-Built to simplify and automate vulnerability assessments using open-source security tools.
-
-</div>
+Vigil is licensed under the **Apache License 2.0**. See the [LICENSE](LICENSE) file for the full license terms.
